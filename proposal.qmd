@@ -75,3 +75,7 @@ Two major questions I plan to investigate surround demographic factors and chang
 ## Analysis plan
 
 For both of these questions, I will need to gather demographic data from the U.S. Census Bureau to investigate correlations between factors such as race and household income and rates of water insecurity.
+
+After gathering all the necessary data from the Census Bureau, we can create visuals comparing rates of water insecurity against various socioeconomic and regional factors in scatterplots and line graphs. If strong correlations exist among specific demographics, we can further investigate them with visualizations such as boxplots and histograms to compare between counties of differing demographics. We can also create a geographic visualization of the U.S. to identify any stark patterns across regions.
+
+After identifying any potential trends based around demographic data, we can assess how rates of water insecurity changed from 2022 and 2023 in all respective counties that we have both years of data for. After examining how rates of water insecurity changed, we can begin to examine if specific demographics were correlated with improvements or worsening rates of water insecurity. We can create a new variable showing the differential between water insecurity in 2022 and 2023 and use that to identify trends among specific demographics.
