@@ -56,29 +56,29 @@ data("penguins")
 
 ## Quarto
 
--   The presentation is created using the Quarto CLI
+- The presentation is created using the Quarto CLI
 
--   `##` sets the start of a new slide
+- `##` sets the start of a new slide
 
 ## Layouts
 
 You can use plain text
 
-::: columns
+::::: columns
 ::: {.column width="40%"}
--   or bullet points[^1]
+- or bullet points[^1]
 :::
 
 ::: {.column width="60%"}
 or in two columns
 :::
-:::
+:::::
 
 [^1]: And add footnotes
 
--   like
+- like
 
--   this
+- this
 
 ## Code
 
@@ -102,11 +102,11 @@ penguins |>
 
 ## Plot and text
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
--   Some text
+- Some text
 
--   goes here
+- goes here
 :::
 
 ::: {.column width="50%"}
@@ -119,7 +119,7 @@ penguins |>
   theme(legend.key.size = unit(0.8, "cm"))
 ```
 :::
-:::
+:::::
 
 # A new section...
 
@@ -146,9 +146,7 @@ You can write LaTeX math expressions inside a pair of dollar signs, e.g. \$\\al
 $$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
 ```
 
-$$
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-$$
+$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
 
 Limitations:
 
@@ -160,6 +158,6 @@ Limitations:
 
 ## Feeling adventurous?
 
--   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
+- You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
 
--   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
+- But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.

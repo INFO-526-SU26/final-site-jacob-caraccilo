@@ -2,9 +2,9 @@
   {
     "objectID": "proposal.html",
     "href": "proposal.html",
-    "title": "Proposal title",
+    "title": "Investigating Water Insecurity in the United States",
     "section": "",
-    "text": "library(tidyverse)"
+    "text": "# installs pacman if not already installed\nif (!require(\"pacman\")) \n  install.packages(\"pacman\")\n\n# installs a list of packages when listed in p_load\n pacman::p_load(tidyverse,\n                tidytuesdayR,\n                sf,\n                kableExtra)\n \n# loads in TidyTuesday Water Insecurity Dataset\ntuesdata &lt;- tidytuesdayR::tt_load('2025-01-28')\n \n# sets the 2022 and 2023 data to their own variables\nwater_insecurity_2022 &lt;- tuesdata$water_insecurity_2022\nwater_insecurity_2023 &lt;- tuesdata$water_insecurity_2023"
   },
   {
     "objectID": "proposal.html#dataset",
@@ -16,16 +16,16 @@
   {
     "objectID": "proposal.html#questions",
     "href": "proposal.html#questions",
-    "title": "Proposal title",
+    "title": "Investigating Water Insecurity in the United States",
     "section": "Questions",
-    "text": "Questions\nThe two questions you want to answer."
+    "text": "Questions\nTwo major questions I plan to investigate surround demographic factors and change to rates of water insecurity overtime.\n\nWhat social, regional, and economic factors are correlated with higher and lower rates of water insecurity?\nWhich regions saw the biggest changes in water insecurity rates from 2022 to 2023? Did those regions improve or worsen? Does the presence of certain socioeconomic or regional factors appear relevant to improvements or worsening of water insecurity rates?"
   },
   {
     "objectID": "proposal.html#analysis-plan",
     "href": "proposal.html#analysis-plan",
-    "title": "Proposal title",
+    "title": "Investigating Water Insecurity in the United States",
     "section": "Analysis plan",
-    "text": "Analysis plan\n\nA plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any)."
+    "text": "Analysis plan\nFor both of these questions, I will need to gather demographic data from the U.S. Census Bureau to investigate correlations between factors such as race and household income and rates of water insecurity.\nAfter gathering all the necessary data from the Census Bureau, we can create visuals comparing rates of water insecurity against various socioeconomic and regional factors in scatterplots and line graphs. If strong correlations exist among specific demographics, we can further investigate them with visualizations such as boxplots and histograms to compare between counties of differing demographics. We can also create a geographic visualization of the U.S. to identify any stark patterns across regions.\nAfter identifying any potential trends based around demographic data, we can assess how rates of water insecurity changed from 2022 and 2023 in all respective counties that we have both years of data for. After examining how rates of water insecurity changed, we can begin to examine if specific demographics were correlated with improvements or worsening rates of water insecurity. We can create a new variable showing the differential between water insecurity in 2022 and 2023 and use that to identify trends among specific demographics."
   },
   {
     "objectID": "index.html",
@@ -45,36 +45,36 @@
     "objectID": "presentation.html#quarto",
     "href": "presentation.html#quarto",
     "title": "Project title",
-    "section": "Quarto",
-    "text": "Quarto\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
+    "section": "",
+    "text": "The presentation is created using the Quarto CLI\n## sets the start of a new slide"
   },
   {
     "objectID": "presentation.html#layouts",
     "href": "presentation.html#layouts",
     "title": "Project title",
-    "section": "Layouts",
-    "text": "Layouts\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis\n\nAnd add footnotes"
+    "section": "",
+    "text": "You can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis"
   },
   {
     "objectID": "presentation.html#code",
     "href": "presentation.html#code",
     "title": "Project title",
-    "section": "Code",
-    "text": "Code\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
+    "section": "",
+    "text": "# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
   },
   {
     "objectID": "presentation.html#plots",
     "href": "presentation.html#plots",
     "title": "Project title",
-    "section": "Plots",
-    "text": "Plots"
+    "section": "",
+    "text": "Warning: Removed 2 rows containing missing values or values outside the scale range\n(`geom_point()`)."
   },
   {
     "objectID": "presentation.html#plot-and-text",
     "href": "presentation.html#plot-and-text",
     "title": "Project title",
-    "section": "Plot and text",
-    "text": "Plot and text\n\n\n\nSome text\ngoes here"
+    "section": "",
+    "text": "Some text\ngoes here"
   },
   {
     "objectID": "presentation.html#tables",
@@ -88,14 +88,14 @@
     "href": "presentation.html#images",
     "title": "Project title",
     "section": "Images",
-    "text": "Images\n\nImage credit: Danielle Navarro, Percolate."
+    "text": "Images\n\n\n\nImage credit: Danielle Navarro, Percolate."
   },
   {
     "objectID": "presentation.html#math-expressions",
     "href": "presentation.html#math-expressions",
     "title": "Project title",
     "section": "Math Expressions",
-    "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\n\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\n\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
+    "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
   },
   {
     "objectID": "presentation.html#feeling-adventurous",
@@ -110,5 +110,26 @@
     "title": "About",
     "section": "",
     "text": "This project was developed by [Team Name] For INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nTeam member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\nTeam member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\nTeam member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\nTeam member 4: One sentence description of Team member 4 (e.g., year, major, etc.)."
+  },
+  {
+    "objectID": "proposal.html#the-tidytuesday-water-insecurity-dataset",
+    "href": "proposal.html#the-tidytuesday-water-insecurity-dataset",
+    "title": "Investigating Water Insecurity in the United States",
+    "section": "The TidyTuesday Water Insecurity Dataset",
+    "text": "The TidyTuesday Water Insecurity Dataset\nThe ‘Water Insecurity’ Dataset was published on January 28th of 2025 for TidyTuesday and was curated by Niha Pereira. It explores household access to water across U.S. counties and allows us to investigate regional and population related patterns for water insecurity. Combined with demographic data, it can also provide insight into social and economic factors that may contribute to rates of water insecurity across the U.S.\nThe data includes two separate datasets for 2022 and 2023 each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.\nThe 2022 data set includes 848counties while the 2023 data set includes 854. They both contain 7 parameters:\n\ngeoid: A character variable of a unique county identifier code used by the U.S. Census Bureau.\nname: A character variable of the name of the U.S. County.\nyear: A numerical variable of the year the data was collected (constant for each dataset).\ngeometry: A spatial geometry object that contains the geographic boundaries for each county in the dataset. Used to plot geographic maps of the U.S.\ntotal_pop: A numerical variable representing the population of a given county.\nplumbing: A numerical variable representing the estimated number of people in the county who are water insecure, defined as their household lacking full plumbing.\npercent_lacking_plumbing: A numerical variable of the percent of people in a country who are water insecure, basically being a ratio of plumbing and total_pop.\n\nI chose this dataset due to personal interest in water accessibility. I live in the California Central Valley which has struggled with water shortages and droughts for decades. I am interested in investigating and identifying social, regional, and economic factors that correlate with water insecurity and providing insight into the causes of water insecurity in my region and across the U.S."
+  },
+  {
+    "objectID": "presentation.html",
+    "href": "presentation.html",
+    "title": "Project title",
+    "section": "",
+    "text": "The presentation is created using the Quarto CLI\n## sets the start of a new slide\n\n\n\n\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis\n\n\n\n\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;\n\n\n\n\n\n\n\nWarning: Removed 2 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSome text\ngoes here"
+  },
+  {
+    "objectID": "presentation.html#footnotes",
+    "href": "presentation.html#footnotes",
+    "title": "Project title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnd add footnotes↩︎"
   }
 ]
