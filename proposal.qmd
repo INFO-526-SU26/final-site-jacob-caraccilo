@@ -21,6 +21,7 @@ execute:
 ```{r}
 #| label: load-pkgs
 #| message: false
+#| echo: false
 
 # installs pacman if not already installed
 if (!require("pacman")) 
@@ -38,6 +39,16 @@ tuesdata <- tidytuesdayR::tt_load('2025-01-28')
 # sets the 2022 and 2023 data to their own variables
 water_insecurity_2022 <- tuesdata$water_insecurity_2022
 water_insecurity_2023 <- tuesdata$water_insecurity_2023
+```
+
+```{r}
+# provides glimpse at 2022 water insecurity data
+glimpse(water_insecurity_2022)
+```
+
+```{r}
+# provides glimpse at 2023 water insecurity data
+glimpse(water_insecurity_2023)
 ```
 
 ## The TidyTuesday Water Insecurity Dataset
