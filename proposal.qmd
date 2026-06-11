@@ -74,8 +74,32 @@ Two major questions I plan to investigate surround demographic factors and chang
 
 ## Analysis plan
 
-For both of these questions, I will need to gather demographic data from the U.S. Census Bureau to investigate correlations between factors such as race and household income and rates of water insecurity.
+For both of these questions, we will need to gather demographic data from the U.S. Census Bureau and will likely have to begin with answering question one to help inform our conclusions regarding question too. The following steps are proposed.
 
-After gathering all the necessary data from the Census Bureau, we can create visuals comparing rates of water insecurity against various socioeconomic and regional factors in scatterplots and line graphs. If strong correlations exist among specific demographics, we can further investigate them with visualizations such as boxplots and histograms to compare between counties of differing demographics. We can also create a geographic visualization of the U.S. to identify any stark patterns across regions.
+### Step 1: Identify and Download U.S. Census Bureau Data
 
-After identifying any potential trends based around demographic data, we can assess how rates of water insecurity changed from 2022 and 2023 in all respective counties that we have both years of data for. After examining how rates of water insecurity changed, we can begin to examine if specific demographics were correlated with improvements or worsening rates of water insecurity. We can create a new variable showing the differential between water insecurity in 2022 and 2023 and use that to identify trends among specific demographics.
+The TidyTuesday dataset does not include any demographic information for U.S. counties aside from population. Because of this, we will have to use additional external data from the U.S. Census Bureau. We will gather data regarding racial makeup and median income data for all U.S. counties included in our dataset.
+
+### Step 2: Complete Data Processing and Cleaning to Fully Integrate U.S. Census Bureau Data with TidyTuesday Dataset
+
+Upon collecting all external data from the U.S. Census Bureau, we will complete data processing and cleaning to integrate all of the data into a single dataframe that we can use for analysis. This will include standardizing column names, removing extra data from counties not present in the TidyTuesday dataset, resolving issues with missing data, and any other data cleaning necessary to make the dataset easily usable for analysis.
+
+### Step 3: Construct visualizations of Water Insecurity Rates against Demographic Information
+
+Once data processing is completed, we can create visualizations to compare demographic information to rates of water insecurity across all available counties.
+
+Difference in parameterization of the racial and income data will be necessary. For racial makeup we will compare counties with 50% or greater of a specific group to water insecurity and examine difference among all racial groups. For median income, we will be more easily able to compare all counties at once, but may subdivide by specific income brackets to better analyze trends.
+
+The following visualization types are proposed:\
+\
+• Boxplots: Necessary to gather summarizing statistical information about all racial groups and median income.
+
+• Density Plots: Helpful at identifying clusters of data that the boxplots would fail to show.
+
+• Linear Regression Plots: Tells us the specific strength of the relationship between water insecurity and demographics.
+
+### Step 4: Compare 2022 Data to 2023 Data Using the Same Methods to Determine Yearly Trends
+
+After identifying any interesting trends among water insecurity and demographics, we can compare the year to year data to see if there are any changes from 2022 to 2023. We do have to be careful not to project too much based off this analysis since we're only looking at two years. However, we can use this data to identify any major changes that occur. Furthermore, we can use this opportunity to see if specific demographics are related with certain changes in water insecurity from 2022 and 2023.
+
+Collectively, both these questions will tell us about which counties and which specific communities are struggling with water insecurity and how rates in water insecurity appear to be changing over time.
