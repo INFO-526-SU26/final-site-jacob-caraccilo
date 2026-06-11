@@ -4259,7 +4259,13 @@ vertical-align: -.125em;
   <ul>
   <li><a href="#the-tidytuesday-water-insecurity-dataset" id="toc-the-tidytuesday-water-insecurity-dataset" class="nav-link active" data-scroll-target="#the-tidytuesday-water-insecurity-dataset">The TidyTuesday Water Insecurity Dataset</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
-  <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a></li>
+  <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a>
+  <ul class="collapse">
+  <li><a href="#step-1-identify-and-download-u.s.-census-bureau-data" id="toc-step-1-identify-and-download-u.s.-census-bureau-data" class="nav-link" data-scroll-target="#step-1-identify-and-download-u.s.-census-bureau-data">Step 1: Identify and Download U.S. Census Bureau Data</a></li>
+  <li><a href="#step-2-complete-data-processing-and-cleaning-to-fully-integrate-u.s.-census-bureau-data-with-tidytuesday-dataset" id="toc-step-2-complete-data-processing-and-cleaning-to-fully-integrate-u.s.-census-bureau-data-with-tidytuesday-dataset" class="nav-link" data-scroll-target="#step-2-complete-data-processing-and-cleaning-to-fully-integrate-u.s.-census-bureau-data-with-tidytuesday-dataset">Step 2: Complete Data Processing and Cleaning to Fully Integrate U.S. Census Bureau Data with TidyTuesday Dataset</a></li>
+  <li><a href="#step-3-construct-visualizations-of-water-insecurity-rates-against-demographic-information" id="toc-step-3-construct-visualizations-of-water-insecurity-rates-against-demographic-information" class="nav-link" data-scroll-target="#step-3-construct-visualizations-of-water-insecurity-rates-against-demographic-information">Step 3: Construct visualizations of Water Insecurity Rates against Demographic Information</a></li>
+  <li><a href="#step-4-compare-2022-data-to-2023-data-using-the-same-methods-to-determine-yearly-trends" id="toc-step-4-compare-2022-data-to-2023-data-using-the-same-methods-to-determine-yearly-trends" class="nav-link" data-scroll-target="#step-4-compare-2022-data-to-2023-data-using-the-same-methods-to-determine-yearly-trends">Step 4: Compare 2022 Data to 2023 Data Using the Same Methods to Determine Yearly Trends</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -4306,22 +4312,34 @@ vertical-align: -.125em;
 
 
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># installs pacman if not already installed</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;pacman&quot;</span>)) </span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># installs a list of packages when listed in p_load</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a> pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
-<span id="cb1-7"><a href="#cb1-7"></a>                tidytuesdayR,</span>
-<span id="cb1-8"><a href="#cb1-8"></a>                sf,</span>
-<span id="cb1-9"><a href="#cb1-9"></a>                kableExtra)</span>
-<span id="cb1-10"><a href="#cb1-10"></a> </span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># loads in TidyTuesday Water Insecurity Dataset</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">&#39;2025-01-28&#39;</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a> </span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co"># sets the 2022 and 2023 data to their own variables</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>water_insecurity_2022 <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>water_insecurity_2022</span>
-<span id="cb1-16"><a href="#cb1-16"></a>water_insecurity_2023 <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>water_insecurity_2023</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># provides glimpse at 2022 water insecurity data</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">glimpse</span>(water_insecurity_2022)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 848
+Columns: 7
+$ geoid                    &lt;chr&gt; &quot;01069&quot;, &quot;04001&quot;, &quot;06037&quot;, &quot;06097&quot;, &quot;06001&quot;, …
+$ name                     &lt;chr&gt; &quot;Houston County, Alabama&quot;, &quot;Apache County, Ar…
+$ year                     &lt;dbl&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 202…
+$ geometry                 &lt;chr&gt; &quot;list(list(c(975267.980555021, 975512.9445474…
+$ total_pop                &lt;dbl&gt; 108079, 65432, 9721138, 482650, 1628997, 8978…
+$ plumbing                 &lt;dbl&gt; 93, 2440, 6195, 148, 808, 18, 128, 0, 123, 13…
+$ percent_lacking_plumbing &lt;dbl&gt; 0.08604817, 3.72906223, 0.06372711, 0.0306640…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># provides glimpse at 2023 water insecurity data</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">glimpse</span>(water_insecurity_2023)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 854
+Columns: 7
+$ geoid                    &lt;chr&gt; &quot;01003&quot;, &quot;01069&quot;, &quot;06037&quot;, &quot;06087&quot;, &quot;06097&quot;, …
+$ name                     &lt;chr&gt; &quot;Baldwin County, Alabama&quot;, &quot;Houston County, A…
+$ year                     &lt;dbl&gt; 2023, 2023, 2023, 2023, 2023, 2023, 2023, 202…
+$ geometry                 &lt;chr&gt; &quot;list(list(c(765297.99052762, 765703.76567671…
+$ total_pop                &lt;dbl&gt; 253507, 108462, 9663345, 261547, 481812, 1155…
+$ plumbing                 &lt;dbl&gt; 271, 30, 5248, 187, 308, 517, 4, 198, 1269, 8…
+$ percent_lacking_plumbing &lt;dbl&gt; 0.106900401, 0.027659457, 0.054308317, 0.0714…</code></pre>
+</div>
 </div>
 <section id="the-tidytuesday-water-insecurity-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="the-tidytuesday-water-insecurity-dataset">The TidyTuesday Water Insecurity Dataset</h2>
@@ -4349,13 +4367,34 @@ vertical-align: -.125em;
 </section>
 <section id="analysis-plan" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-plan">Analysis plan</h2>
-<p>For both of these questions, I will need to gather demographic data from the U.S. Census Bureau to investigate correlations between factors such as race and household income and rates of water insecurity.</p>
-<p>After gathering all the necessary data from the Census Bureau, we can create visuals comparing rates of water insecurity against various socioeconomic and regional factors in scatterplots and line graphs. If strong correlations exist among specific demographics, we can further investigate them with visualizations such as boxplots and histograms to compare between counties of differing demographics. We can also create a geographic visualization of the U.S. to identify any stark patterns across regions.</p>
-<p>After identifying any potential trends based around demographic data, we can assess how rates of water insecurity changed from 2022 and 2023 in all respective counties that we have both years of data for. After examining how rates of water insecurity changed, we can begin to examine if specific demographics were correlated with improvements or worsening rates of water insecurity. We can create a new variable showing the differential between water insecurity in 2022 and 2023 and use that to identify trends among specific demographics.</p>
+<p>For both of these questions, we will need to gather demographic data from the U.S. Census Bureau and will likely have to begin with answering question one to help inform our conclusions regarding question too. The following steps are proposed.</p>
+<section id="step-1-identify-and-download-u.s.-census-bureau-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-identify-and-download-u.s.-census-bureau-data">Step 1: Identify and Download U.S. Census Bureau Data</h3>
+<p>The TidyTuesday dataset does not include any demographic information for U.S. counties aside from population. Because of this, we will have to use additional external data from the U.S. Census Bureau. We will gather data regarding racial makeup and median income data for all U.S. counties included in our dataset.</p>
+</section>
+<section id="step-2-complete-data-processing-and-cleaning-to-fully-integrate-u.s.-census-bureau-data-with-tidytuesday-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-complete-data-processing-and-cleaning-to-fully-integrate-u.s.-census-bureau-data-with-tidytuesday-dataset">Step 2: Complete Data Processing and Cleaning to Fully Integrate U.S. Census Bureau Data with TidyTuesday Dataset</h3>
+<p>Upon collecting all external data from the U.S. Census Bureau, we will complete data processing and cleaning to integrate all of the data into a single dataframe that we can use for analysis. This will include standardizing column names, removing extra data from counties not present in the TidyTuesday dataset, resolving issues with missing data, and any other data cleaning necessary to make the dataset easily usable for analysis.</p>
+</section>
+<section id="step-3-construct-visualizations-of-water-insecurity-rates-against-demographic-information" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-construct-visualizations-of-water-insecurity-rates-against-demographic-information">Step 3: Construct visualizations of Water Insecurity Rates against Demographic Information</h3>
+<p>Once data processing is completed, we can create visualizations to compare demographic information to rates of water insecurity across all available counties.</p>
+<p>Difference in parameterization of the racial and income data will be necessary. For racial makeup we will compare counties with 50% or greater of a specific group to water insecurity and examine difference among all racial groups. For median income, we will be more easily able to compare all counties at once, but may subdivide by specific income brackets to better analyze trends.</p>
+<p>The following visualization types are proposed:<br>
+<br>
+• Boxplots: Necessary to gather summarizing statistical information about all racial groups and median income.</p>
+<p>• Density Plots: Helpful at identifying clusters of data that the boxplots would fail to show.</p>
+<p>• Linear Regression Plots: Tells us the specific strength of the relationship between water insecurity and demographics.</p>
+</section>
+<section id="step-4-compare-2022-data-to-2023-data-using-the-same-methods-to-determine-yearly-trends" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-compare-2022-data-to-2023-data-using-the-same-methods-to-determine-yearly-trends">Step 4: Compare 2022 Data to 2023 Data Using the Same Methods to Determine Yearly Trends</h3>
+<p>After identifying any interesting trends among water insecurity and demographics, we can compare the year to year data to see if there are any changes from 2022 to 2023. We do have to be careful not to project too much based off this analysis since we’re only looking at two years. However, we can use this data to identify any major changes that occur. Furthermore, we can use this opportunity to see if specific demographics are related with certain changes in water insecurity from 2022 and 2023.</p>
+<p>Collectively, both these questions will tell us about which counties and which specific communities are struggling with water insecurity and how rates in water insecurity appear to be changing over time.</p>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -4862,87 +4901,122 @@ vertical-align: -.125em;
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="an">title:</span><span class="co"> &quot;Investigating Water Insecurity in the United States&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="an">subtitle:</span><span class="co"> &quot;INFO 526 Final Project Proposal&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="an">author:</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">  - name: &quot;Jacob Caraccilo&quot;</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">    affiliations:</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">      - name: &quot;School of Information, University of Arizona&quot;</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="an">description:</span><span class="co"> &quot;Proposal for a data visualization project using the 2025 TidyTuesday Water Insecurity dataset to investigate patterns of water insecurity across U.S. counties.&quot;</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="an">format:</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">  html:</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">    code-tools: true</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">    code-overflow: wrap</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">    code-line-numbers: true</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">    embed-resources: true</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="an">editor:</span><span class="co"> visual</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="an">code-annotations:</span><span class="co"> hover</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="an">execute:</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">  warning: false</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">---</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="in">```{r}</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#| label: load-pkgs</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#| message: false</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a></span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="co"># installs pacman if not already installed</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;pacman&quot;</span>)) </span>
-<span id="cb2-29"><a href="#cb2-29"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)</span>
-<span id="cb2-30"><a href="#cb2-30"></a></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co"># installs a list of packages when listed in p_load</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a> pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
-<span id="cb2-33"><a href="#cb2-33"></a>                tidytuesdayR,</span>
-<span id="cb2-34"><a href="#cb2-34"></a>                sf,</span>
-<span id="cb2-35"><a href="#cb2-35"></a>                kableExtra)</span>
-<span id="cb2-36"><a href="#cb2-36"></a> </span>
-<span id="cb2-37"><a href="#cb2-37"></a><span class="co"># loads in TidyTuesday Water Insecurity Dataset</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">&#39;2025-01-28&#39;</span>)</span>
-<span id="cb2-39"><a href="#cb2-39"></a> </span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="co"># sets the 2022 and 2023 data to their own variables</span></span>
-<span id="cb2-41"><a href="#cb2-41"></a>water_insecurity_2022 <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>water_insecurity_2022</span>
-<span id="cb2-42"><a href="#cb2-42"></a>water_insecurity_2023 <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>water_insecurity_2023</span>
-<span id="cb2-43"><a href="#cb2-43"></a><span class="in">```</span></span>
-<span id="cb2-44"><a href="#cb2-44"></a></span>
-<span id="cb2-45"><a href="#cb2-45"></a><span class="fu">## The TidyTuesday Water Insecurity Dataset</span></span>
-<span id="cb2-46"><a href="#cb2-46"></a></span>
-<span id="cb2-47"><a href="#cb2-47"></a>The &#39;Water Insecurity&#39; Dataset was published on January 28th of 2025 for TidyTuesday and was curated by Niha Pereira. It explores household access to water across U.S. counties and allows us to investigate regional and population related patterns for water insecurity. Combined with demographic data, it can also provide insight into social and economic factors that may contribute to rates of water insecurity across the U.S.</span>
-<span id="cb2-48"><a href="#cb2-48"></a></span>
-<span id="cb2-49"><a href="#cb2-49"></a>The data includes two separate datasets for 2022 and 2023 each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.</span>
-<span id="cb2-50"><a href="#cb2-50"></a></span>
-<span id="cb2-51"><a href="#cb2-51"></a>The 2022 data set includes <span class="in">`r nrow(water_insecurity_2022)`</span>counties while the 2023 data set includes <span class="in">`r nrow(water_insecurity_2023)`</span>. They both contain <span class="in">`r ncol(water_insecurity_2022)`</span> parameters:</span>
-<span id="cb2-52"><a href="#cb2-52"></a></span>
-<span id="cb2-53"><a href="#cb2-53"></a><span class="ss">- </span><span class="in">`geoid`</span>: A character variable of a unique county identifier code used by the U.S. Census Bureau.</span>
-<span id="cb2-54"><a href="#cb2-54"></a></span>
-<span id="cb2-55"><a href="#cb2-55"></a><span class="ss">- </span><span class="in">`name`</span>: A character variable of the name of the U.S. County.</span>
-<span id="cb2-56"><a href="#cb2-56"></a></span>
-<span id="cb2-57"><a href="#cb2-57"></a><span class="ss">- </span><span class="in">`year`</span>: A numerical variable of the year the data was collected (constant for each dataset).</span>
-<span id="cb2-58"><a href="#cb2-58"></a></span>
-<span id="cb2-59"><a href="#cb2-59"></a><span class="ss">- </span><span class="in">`geometry`</span>: A spatial geometry object that contains the geographic boundaries for each county in the dataset. Used to plot geographic maps of the U.S.</span>
-<span id="cb2-60"><a href="#cb2-60"></a></span>
-<span id="cb2-61"><a href="#cb2-61"></a><span class="ss">- </span><span class="in">`total_pop`</span>: A numerical variable representing the population of a given county.</span>
-<span id="cb2-62"><a href="#cb2-62"></a></span>
-<span id="cb2-63"><a href="#cb2-63"></a><span class="ss">- </span><span class="in">`plumbing`</span>: A numerical variable representing the estimated number of people in the county who are water insecure, defined as their household lacking full plumbing.</span>
-<span id="cb2-64"><a href="#cb2-64"></a></span>
-<span id="cb2-65"><a href="#cb2-65"></a><span class="ss">- </span><span class="in">`percent_lacking_plumbing`</span>: A numerical variable of the percent of people in a country who are water insecure, basically being a ratio of <span class="in">`plumbing`</span> and <span class="in">`total_pop`</span>.</span>
-<span id="cb2-66"><a href="#cb2-66"></a></span>
-<span id="cb2-67"><a href="#cb2-67"></a>I chose this dataset due to personal interest in water accessibility. I live in the California Central Valley which has struggled with water shortages and droughts for decades. I am interested in investigating and identifying social, regional, and economic factors that correlate with water insecurity and providing insight into the causes of water insecurity in my region and across the U.S.</span>
-<span id="cb2-68"><a href="#cb2-68"></a></span>
-<span id="cb2-69"><a href="#cb2-69"></a><span class="fu">## Questions</span></span>
-<span id="cb2-70"><a href="#cb2-70"></a></span>
-<span id="cb2-71"><a href="#cb2-71"></a>Two major questions I plan to investigate surround demographic factors and change to rates of water insecurity overtime.</span>
-<span id="cb2-72"><a href="#cb2-72"></a></span>
-<span id="cb2-73"><a href="#cb2-73"></a><span class="ss">- </span>What social, regional, and economic factors are correlated with higher and lower rates of water insecurity?</span>
-<span id="cb2-74"><a href="#cb2-74"></a></span>
-<span id="cb2-75"><a href="#cb2-75"></a><span class="ss">- </span>Which regions saw the biggest changes in water insecurity rates from 2022 to 2023? Did those regions improve or worsen? Does the presence of certain socioeconomic or regional factors appear relevant to improvements or worsening of water insecurity rates?</span>
-<span id="cb2-76"><a href="#cb2-76"></a></span>
-<span id="cb2-77"><a href="#cb2-77"></a><span class="fu">## Analysis plan</span></span>
-<span id="cb2-78"><a href="#cb2-78"></a></span>
-<span id="cb2-79"><a href="#cb2-79"></a>For both of these questions, I will need to gather demographic data from the U.S. Census Bureau to investigate correlations between factors such as race and household income and rates of water insecurity.</span>
-<span id="cb2-80"><a href="#cb2-80"></a></span>
-<span id="cb2-81"><a href="#cb2-81"></a>After gathering all the necessary data from the Census Bureau, we can create visuals comparing rates of water insecurity against various socioeconomic and regional factors in scatterplots and line graphs. If strong correlations exist among specific demographics, we can further investigate them with visualizations such as boxplots and histograms to compare between counties of differing demographics. We can also create a geographic visualization of the U.S. to identify any stark patterns across regions.</span>
-<span id="cb2-82"><a href="#cb2-82"></a></span>
-<span id="cb2-83"><a href="#cb2-83"></a>After identifying any potential trends based around demographic data, we can assess how rates of water insecurity changed from 2022 and 2023 in all respective counties that we have both years of data for. After examining how rates of water insecurity changed, we can begin to examine if specific demographics were correlated with improvements or worsening rates of water insecurity. We can create a new variable showing the differential between water insecurity in 2022 and 2023 and use that to identify trends among specific demographics.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="an">title:</span><span class="co"> &quot;Investigating Water Insecurity in the United States&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="an">subtitle:</span><span class="co"> &quot;INFO 526 Final Project Proposal&quot;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="an">author:</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">  - name: &quot;Jacob Caraccilo&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">    affiliations:</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">      - name: &quot;School of Information, University of Arizona&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="an">description:</span><span class="co"> &quot;Proposal for a data visualization project using the 2025 TidyTuesday Water Insecurity dataset to investigate patterns of water insecurity across U.S. counties.&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="an">format:</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">  html:</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">    code-tools: true</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">    code-overflow: wrap</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">    code-line-numbers: true</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="an">code-annotations:</span><span class="co"> hover</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="an">execute:</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">  warning: false</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">---</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="in">```{r}</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="co">#| label: load-pkgs</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="co">#| message: false</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="co">#| echo: false</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="co"># installs pacman if not already installed</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;pacman&quot;</span>)) </span>
+<span id="cb5-30"><a href="#cb5-30"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)</span>
+<span id="cb5-31"><a href="#cb5-31"></a></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="co"># installs a list of packages when listed in p_load</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a> pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
+<span id="cb5-34"><a href="#cb5-34"></a>                tidytuesdayR,</span>
+<span id="cb5-35"><a href="#cb5-35"></a>                sf,</span>
+<span id="cb5-36"><a href="#cb5-36"></a>                kableExtra)</span>
+<span id="cb5-37"><a href="#cb5-37"></a> </span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="co"># loads in TidyTuesday Water Insecurity Dataset</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">&#39;2025-01-28&#39;</span>)</span>
+<span id="cb5-40"><a href="#cb5-40"></a> </span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="co"># sets the 2022 and 2023 data to their own variables</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a>water_insecurity_2022 <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>water_insecurity_2022</span>
+<span id="cb5-43"><a href="#cb5-43"></a>water_insecurity_2023 <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>water_insecurity_2023</span>
+<span id="cb5-44"><a href="#cb5-44"></a><span class="in">```</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="in">```{r}</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="co"># provides glimpse at 2022 water insecurity data</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="fu">glimpse</span>(water_insecurity_2022)</span>
+<span id="cb5-51"><a href="#cb5-51"></a><span class="in">```</span></span>
+<span id="cb5-52"><a href="#cb5-52"></a></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="in">```{r}</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="co"># provides glimpse at 2023 water insecurity data</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="fu">glimpse</span>(water_insecurity_2023)</span>
+<span id="cb5-58"><a href="#cb5-58"></a><span class="in">```</span></span>
+<span id="cb5-59"><a href="#cb5-59"></a></span>
+<span id="cb5-60"><a href="#cb5-60"></a><span class="fu">## The TidyTuesday Water Insecurity Dataset</span></span>
+<span id="cb5-61"><a href="#cb5-61"></a></span>
+<span id="cb5-62"><a href="#cb5-62"></a>The &#39;Water Insecurity&#39; Dataset was published on January 28th of 2025 for TidyTuesday and was curated by Niha Pereira. It explores household access to water across U.S. counties and allows us to investigate regional and population related patterns for water insecurity. Combined with demographic data, it can also provide insight into social and economic factors that may contribute to rates of water insecurity across the U.S.</span>
+<span id="cb5-63"><a href="#cb5-63"></a></span>
+<span id="cb5-64"><a href="#cb5-64"></a>The data includes two separate datasets for 2022 and 2023 each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.</span>
+<span id="cb5-65"><a href="#cb5-65"></a></span>
+<span id="cb5-66"><a href="#cb5-66"></a>The 2022 data set includes <span class="in">`r nrow(water_insecurity_2022)`</span>counties while the 2023 data set includes <span class="in">`r nrow(water_insecurity_2023)`</span>. They both contain <span class="in">`r ncol(water_insecurity_2022)`</span> parameters:</span>
+<span id="cb5-67"><a href="#cb5-67"></a></span>
+<span id="cb5-68"><a href="#cb5-68"></a><span class="ss">- </span><span class="in">`geoid`</span>: A character variable of a unique county identifier code used by the U.S. Census Bureau.</span>
+<span id="cb5-69"><a href="#cb5-69"></a></span>
+<span id="cb5-70"><a href="#cb5-70"></a><span class="ss">- </span><span class="in">`name`</span>: A character variable of the name of the U.S. County.</span>
+<span id="cb5-71"><a href="#cb5-71"></a></span>
+<span id="cb5-72"><a href="#cb5-72"></a><span class="ss">- </span><span class="in">`year`</span>: A numerical variable of the year the data was collected (constant for each dataset).</span>
+<span id="cb5-73"><a href="#cb5-73"></a></span>
+<span id="cb5-74"><a href="#cb5-74"></a><span class="ss">- </span><span class="in">`geometry`</span>: A spatial geometry object that contains the geographic boundaries for each county in the dataset. Used to plot geographic maps of the U.S.</span>
+<span id="cb5-75"><a href="#cb5-75"></a></span>
+<span id="cb5-76"><a href="#cb5-76"></a><span class="ss">- </span><span class="in">`total_pop`</span>: A numerical variable representing the population of a given county.</span>
+<span id="cb5-77"><a href="#cb5-77"></a></span>
+<span id="cb5-78"><a href="#cb5-78"></a><span class="ss">- </span><span class="in">`plumbing`</span>: A numerical variable representing the estimated number of people in the county who are water insecure, defined as their household lacking full plumbing.</span>
+<span id="cb5-79"><a href="#cb5-79"></a></span>
+<span id="cb5-80"><a href="#cb5-80"></a><span class="ss">- </span><span class="in">`percent_lacking_plumbing`</span>: A numerical variable of the percent of people in a country who are water insecure, basically being a ratio of <span class="in">`plumbing`</span> and <span class="in">`total_pop`</span>.</span>
+<span id="cb5-81"><a href="#cb5-81"></a></span>
+<span id="cb5-82"><a href="#cb5-82"></a>I chose this dataset due to personal interest in water accessibility. I live in the California Central Valley which has struggled with water shortages and droughts for decades. I am interested in investigating and identifying social, regional, and economic factors that correlate with water insecurity and providing insight into the causes of water insecurity in my region and across the U.S.</span>
+<span id="cb5-83"><a href="#cb5-83"></a></span>
+<span id="cb5-84"><a href="#cb5-84"></a><span class="fu">## Questions</span></span>
+<span id="cb5-85"><a href="#cb5-85"></a></span>
+<span id="cb5-86"><a href="#cb5-86"></a>Two major questions I plan to investigate surround demographic factors and change to rates of water insecurity overtime.</span>
+<span id="cb5-87"><a href="#cb5-87"></a></span>
+<span id="cb5-88"><a href="#cb5-88"></a><span class="ss">- </span>What social, regional, and economic factors are correlated with higher and lower rates of water insecurity?</span>
+<span id="cb5-89"><a href="#cb5-89"></a></span>
+<span id="cb5-90"><a href="#cb5-90"></a><span class="ss">- </span>Which regions saw the biggest changes in water insecurity rates from 2022 to 2023? Did those regions improve or worsen? Does the presence of certain socioeconomic or regional factors appear relevant to improvements or worsening of water insecurity rates?</span>
+<span id="cb5-91"><a href="#cb5-91"></a></span>
+<span id="cb5-92"><a href="#cb5-92"></a><span class="fu">## Analysis plan</span></span>
+<span id="cb5-93"><a href="#cb5-93"></a></span>
+<span id="cb5-94"><a href="#cb5-94"></a>For both of these questions, we will need to gather demographic data from the U.S. Census Bureau and will likely have to begin with answering question one to help inform our conclusions regarding question too. The following steps are proposed.</span>
+<span id="cb5-95"><a href="#cb5-95"></a></span>
+<span id="cb5-96"><a href="#cb5-96"></a><span class="fu">### Step 1: Identify and Download U.S. Census Bureau Data</span></span>
+<span id="cb5-97"><a href="#cb5-97"></a></span>
+<span id="cb5-98"><a href="#cb5-98"></a>The TidyTuesday dataset does not include any demographic information for U.S. counties aside from population. Because of this, we will have to use additional external data from the U.S. Census Bureau. We will gather data regarding racial makeup and median income data for all U.S. counties included in our dataset.</span>
+<span id="cb5-99"><a href="#cb5-99"></a></span>
+<span id="cb5-100"><a href="#cb5-100"></a><span class="fu">### Step 2: Complete Data Processing and Cleaning to Fully Integrate U.S. Census Bureau Data with TidyTuesday Dataset</span></span>
+<span id="cb5-101"><a href="#cb5-101"></a></span>
+<span id="cb5-102"><a href="#cb5-102"></a>Upon collecting all external data from the U.S. Census Bureau, we will complete data processing and cleaning to integrate all of the data into a single dataframe that we can use for analysis. This will include standardizing column names, removing extra data from counties not present in the TidyTuesday dataset, resolving issues with missing data, and any other data cleaning necessary to make the dataset easily usable for analysis.</span>
+<span id="cb5-103"><a href="#cb5-103"></a></span>
+<span id="cb5-104"><a href="#cb5-104"></a><span class="fu">### Step 3: Construct visualizations of Water Insecurity Rates against Demographic Information</span></span>
+<span id="cb5-105"><a href="#cb5-105"></a></span>
+<span id="cb5-106"><a href="#cb5-106"></a>Once data processing is completed, we can create visualizations to compare demographic information to rates of water insecurity across all available counties.</span>
+<span id="cb5-107"><a href="#cb5-107"></a></span>
+<span id="cb5-108"><a href="#cb5-108"></a>Difference in parameterization of the racial and income data will be necessary. For racial makeup we will compare counties with 50% or greater of a specific group to water insecurity and examine difference among all racial groups. For median income, we will be more easily able to compare all counties at once, but may subdivide by specific income brackets to better analyze trends.</span>
+<span id="cb5-109"><a href="#cb5-109"></a></span>
+<span id="cb5-110"><a href="#cb5-110"></a>The following visualization types are proposed:\</span>
+<span id="cb5-111"><a href="#cb5-111"></a>\</span>
+<span id="cb5-112"><a href="#cb5-112"></a>• Boxplots: Necessary to gather summarizing statistical information about all racial groups and median income.</span>
+<span id="cb5-113"><a href="#cb5-113"></a></span>
+<span id="cb5-114"><a href="#cb5-114"></a>• Density Plots: Helpful at identifying clusters of data that the boxplots would fail to show.</span>
+<span id="cb5-115"><a href="#cb5-115"></a></span>
+<span id="cb5-116"><a href="#cb5-116"></a>• Linear Regression Plots: Tells us the specific strength of the relationship between water insecurity and demographics.</span>
+<span id="cb5-117"><a href="#cb5-117"></a></span>
+<span id="cb5-118"><a href="#cb5-118"></a><span class="fu">### Step 4: Compare 2022 Data to 2023 Data Using the Same Methods to Determine Yearly Trends</span></span>
+<span id="cb5-119"><a href="#cb5-119"></a></span>
+<span id="cb5-120"><a href="#cb5-120"></a>After identifying any interesting trends among water insecurity and demographics, we can compare the year to year data to see if there are any changes from 2022 to 2023. We do have to be careful not to project too much based off this analysis since we&#39;re only looking at two years. However, we can use this data to identify any major changes that occur. Furthermore, we can use this opportunity to see if specific demographics are related with certain changes in water insecurity from 2022 and 2023.</span>
+<span id="cb5-121"><a href="#cb5-121"></a></span>
+<span id="cb5-122"><a href="#cb5-122"></a>Collectively, both these questions will tell us about which counties and which specific communities are struggling with water insecurity and how rates in water insecurity appear to be changing over time.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
