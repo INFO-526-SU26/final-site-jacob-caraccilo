@@ -57,7 +57,7 @@ The 'Water Insecurity' Dataset was published on January 28th of 2025 for TidyTue
 
 The data includes two separate datasets for 2022 and 2023 each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.
 
-The 2022 data set includes `r nrow(water_insecurity_2022)`counties while the 2023 data set includes `r nrow(water_insecurity_2023)`. They both contain `r ncol(water_insecurity_2022)` parameters:
+The 2022 data set includes `r nrow(water_insecurity_2022)` counties while the 2023 data set includes `r nrow(water_insecurity_2023)`. They both contain `r ncol(water_insecurity_2022)` parameters:
 
 - `geoid`: A character variable of a unique county identifier code used by the U.S. Census Bureau.
 
