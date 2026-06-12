@@ -4345,7 +4345,7 @@ $ percent_lacking_plumbing &lt;dbl&gt; 0.106900401, 0.027659457, 0.054308317, 0.
 <h2 class="anchored" data-anchor-id="the-tidytuesday-water-insecurity-dataset">The TidyTuesday Water Insecurity Dataset</h2>
 <p>The ‘Water Insecurity’ Dataset was published on January 28th of 2025 for TidyTuesday and was curated by Niha Pereira. It explores household access to water across U.S. counties and allows us to investigate regional and population related patterns for water insecurity. Combined with demographic data, it can also provide insight into social and economic factors that may contribute to rates of water insecurity across the U.S.</p>
 <p>The data includes two separate datasets for 2022 and 2023 each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.</p>
-<p>The 2022 data set includes 848counties while the 2023 data set includes 854. They both contain 7 parameters:</p>
+<p>The 2022 data set includes 848 counties while the 2023 data set includes 854. They both contain 7 parameters:</p>
 <ul>
 <li><p><code>geoid</code>: A character variable of a unique county identifier code used by the U.S. Census Bureau.</p></li>
 <li><p><code>name</code>: A character variable of the name of the U.S. County.</p></li>
@@ -4535,7 +4535,7 @@ $ percent_lacking_plumbing &lt;dbl&gt; 0.106900401, 0.027659457, 0.054308317, 0.
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/INFO-526-SU26\.github\.io\/final-project-jacob-caraccilo\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -4960,7 +4960,7 @@ $ percent_lacking_plumbing &lt;dbl&gt; 0.106900401, 0.027659457, 0.054308317, 0.
 <span id="cb5-63"><a href="#cb5-63"></a></span>
 <span id="cb5-64"><a href="#cb5-64"></a>The data includes two separate datasets for 2022 and 2023 each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.</span>
 <span id="cb5-65"><a href="#cb5-65"></a></span>
-<span id="cb5-66"><a href="#cb5-66"></a>The 2022 data set includes <span class="in">`r nrow(water_insecurity_2022)`</span>counties while the 2023 data set includes <span class="in">`r nrow(water_insecurity_2023)`</span>. They both contain <span class="in">`r ncol(water_insecurity_2022)`</span> parameters:</span>
+<span id="cb5-66"><a href="#cb5-66"></a>The 2022 data set includes <span class="in">`r nrow(water_insecurity_2022)`</span> counties while the 2023 data set includes <span class="in">`r nrow(water_insecurity_2023)`</span>. They both contain <span class="in">`r ncol(water_insecurity_2022)`</span> parameters:</span>
 <span id="cb5-67"><a href="#cb5-67"></a></span>
 <span id="cb5-68"><a href="#cb5-68"></a><span class="ss">- </span><span class="in">`geoid`</span>: A character variable of a unique county identifier code used by the U.S. Census Bureau.</span>
 <span id="cb5-69"><a href="#cb5-69"></a></span>
