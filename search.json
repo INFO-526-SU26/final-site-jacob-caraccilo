@@ -1,0 +1,114 @@
+[
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Investigating Water Insecurity in the United States",
+    "section": "",
+    "text": "# provides glimpse at 2022 water insecurity data\nglimpse(water_insecurity_2022)\n\nRows: 848\nColumns: 7\n$ geoid                    &lt;chr&gt; \"01069\", \"04001\", \"06037\", \"06097\", \"06001\", …\n$ name                     &lt;chr&gt; \"Houston County, Alabama\", \"Apache County, Ar…\n$ year                     &lt;dbl&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022, 202…\n$ geometry                 &lt;chr&gt; \"list(list(c(975267.980555021, 975512.9445474…\n$ total_pop                &lt;dbl&gt; 108079, 65432, 9721138, 482650, 1628997, 8978…\n$ plumbing                 &lt;dbl&gt; 93, 2440, 6195, 148, 808, 18, 128, 0, 123, 13…\n$ percent_lacking_plumbing &lt;dbl&gt; 0.08604817, 3.72906223, 0.06372711, 0.0306640…\n# provides glimpse at 2023 water insecurity data\nglimpse(water_insecurity_2023)\n\nRows: 854\nColumns: 7\n$ geoid                    &lt;chr&gt; \"01003\", \"01069\", \"06037\", \"06087\", \"06097\", …\n$ name                     &lt;chr&gt; \"Baldwin County, Alabama\", \"Houston County, A…\n$ year                     &lt;dbl&gt; 2023, 2023, 2023, 2023, 2023, 2023, 2023, 202…\n$ geometry                 &lt;chr&gt; \"list(list(c(765297.99052762, 765703.76567671…\n$ total_pop                &lt;dbl&gt; 253507, 108462, 9663345, 261547, 481812, 1155…\n$ plumbing                 &lt;dbl&gt; 271, 30, 5248, 187, 308, 517, 4, 198, 1269, 8…\n$ percent_lacking_plumbing &lt;dbl&gt; 0.106900401, 0.027659457, 0.054308317, 0.0714…"
+  },
+  {
+    "objectID": "proposal.html#the-tidytuesday-water-insecurity-dataset",
+    "href": "proposal.html#the-tidytuesday-water-insecurity-dataset",
+    "title": "Investigating Water Insecurity in the United States",
+    "section": "The TidyTuesday Water Insecurity Dataset",
+    "text": "The TidyTuesday Water Insecurity Dataset\nThe ‘Water Insecurity’ Dataset was published on January 28th of 2025 for TidyTuesday and was curated by Niha Pereira. It explores household access to water across U.S. counties and allows us to investigate regional and population related patterns for water insecurity. Combined with demographic data, it can also provide insight into social and economic factors that may contribute to rates of water insecurity across the U.S.\nThe data includes two separate datasets for 2022 and 2023 each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.\nThe 2022 data set includes 848counties while the 2023 data set includes 854. They both contain 7 parameters:\n\ngeoid: A character variable of a unique county identifier code used by the U.S. Census Bureau.\nname: A character variable of the name of the U.S. County.\nyear: A numerical variable of the year the data was collected (constant for each dataset).\ngeometry: A spatial geometry object that contains the geographic boundaries for each county in the dataset. Used to plot geographic maps of the U.S.\ntotal_pop: A numerical variable representing the population of a given county.\nplumbing: A numerical variable representing the estimated number of people in the county who are water insecure, defined as their household lacking full plumbing.\npercent_lacking_plumbing: A numerical variable of the percent of people in a country who are water insecure, basically being a ratio of plumbing and total_pop.\n\nI chose this dataset due to personal interest in water accessibility. I live in the California Central Valley which has struggled with water shortages and droughts for decades. I am interested in investigating and identifying social, regional, and economic factors that correlate with water insecurity and providing insight into the causes of water insecurity in my region and across the U.S."
+  },
+  {
+    "objectID": "proposal.html#questions",
+    "href": "proposal.html#questions",
+    "title": "Investigating Water Insecurity in the United States",
+    "section": "Questions",
+    "text": "Questions\nTwo major questions I plan to investigate surround demographic factors and change to rates of water insecurity overtime.\n\nWhat social, regional, and economic factors are correlated with higher and lower rates of water insecurity?\nWhich regions saw the biggest changes in water insecurity rates from 2022 to 2023? Did those regions improve or worsen? Does the presence of certain socioeconomic or regional factors appear relevant to improvements or worsening of water insecurity rates?"
+  },
+  {
+    "objectID": "proposal.html#analysis-plan",
+    "href": "proposal.html#analysis-plan",
+    "title": "Investigating Water Insecurity in the United States",
+    "section": "Analysis plan",
+    "text": "Analysis plan\nFor both of these questions, we will need to gather demographic data from the U.S. Census Bureau and will likely have to begin with answering question one to help inform our conclusions regarding question too. The following steps are proposed.\n\nStep 1: Identify and Download U.S. Census Bureau Data\nThe TidyTuesday dataset does not include any demographic information for U.S. counties aside from population. Because of this, we will have to use additional external data from the U.S. Census Bureau. We will gather data regarding racial makeup and median income data for all U.S. counties included in our dataset.\n\n\nStep 2: Complete Data Processing and Cleaning to Fully Integrate U.S. Census Bureau Data with TidyTuesday Dataset\nUpon collecting all external data from the U.S. Census Bureau, we will complete data processing and cleaning to integrate all of the data into a single dataframe that we can use for analysis. This will include standardizing column names, removing extra data from counties not present in the TidyTuesday dataset, resolving issues with missing data, and any other data cleaning necessary to make the dataset easily usable for analysis.\n\n\nStep 3: Construct visualizations of Water Insecurity Rates against Demographic Information\nOnce data processing is completed, we can create visualizations to compare demographic information to rates of water insecurity across all available counties.\nDifference in parameterization of the racial and income data will be necessary. For racial makeup we will compare counties with 50% or greater of a specific group to water insecurity and examine difference among all racial groups. For median income, we will be more easily able to compare all counties at once, but may subdivide by specific income brackets to better analyze trends.\nThe following visualization types are proposed:\n\n• Boxplots: Necessary to gather summarizing statistical information about all racial groups and median income.\n• Density Plots: Helpful at identifying clusters of data that the boxplots would fail to show.\n• Linear Regression Plots: Tells us the specific strength of the relationship between water insecurity and demographics.\n\n\nStep 4: Compare 2022 Data to 2023 Data Using the Same Methods to Determine Yearly Trends\nAfter identifying any interesting trends among water insecurity and demographics, we can compare the year to year data to see if there are any changes from 2022 to 2023. We do have to be careful not to project too much based off this analysis since we’re only looking at two years. However, we can use this data to identify any major changes that occur. Furthermore, we can use this opportunity to see if specific demographics are related with certain changes in water insecurity from 2022 and 2023.\nCollectively, both these questions will tell us about which counties and which specific communities are struggling with water insecurity and how rates in water insecurity appear to be changing over time."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Project Title",
+    "section": "",
+    "text": "Add project abstract here."
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "Project Title",
+    "section": "",
+    "text": "Add project abstract here."
+  },
+  {
+    "objectID": "presentation.html#quarto",
+    "href": "presentation.html#quarto",
+    "title": "Project title",
+    "section": "Quarto",
+    "text": "Quarto\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
+  },
+  {
+    "objectID": "presentation.html#layouts",
+    "href": "presentation.html#layouts",
+    "title": "Project title",
+    "section": "Layouts",
+    "text": "Layouts\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\nlike\nthis\n\nAnd add footnotes"
+  },
+  {
+    "objectID": "presentation.html#code",
+    "href": "presentation.html#code",
+    "title": "Project title",
+    "section": "Code",
+    "text": "Code\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
+  },
+  {
+    "objectID": "presentation.html#plots",
+    "href": "presentation.html#plots",
+    "title": "Project title",
+    "section": "Plots",
+    "text": "Plots\n\n\nWarning: Removed 2 rows containing missing values or values outside the scale range\n(`geom_point()`)."
+  },
+  {
+    "objectID": "presentation.html#plot-and-text",
+    "href": "presentation.html#plot-and-text",
+    "title": "Project title",
+    "section": "Plot and text",
+    "text": "Plot and text\n\n\n\nSome text\ngoes here"
+  },
+  {
+    "objectID": "presentation.html#tables",
+    "href": "presentation.html#tables",
+    "title": "Project title",
+    "section": "Tables",
+    "text": "Tables\nIf you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n\n\nAdelie\nTorgersen\nNA\nNA\nNA\nNA\nNA\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale"
+  },
+  {
+    "objectID": "presentation.html#images",
+    "href": "presentation.html#images",
+    "title": "Project title",
+    "section": "Images",
+    "text": "Images\n\nImage credit: Danielle Navarro, Percolate."
+  },
+  {
+    "objectID": "presentation.html#math-expressions",
+    "href": "presentation.html#math-expressions",
+    "title": "Project title",
+    "section": "Math Expressions",
+    "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
+  },
+  {
+    "objectID": "presentation.html#feeling-adventurous",
+    "href": "presentation.html#feeling-adventurous",
+    "title": "Project title",
+    "section": "Feeling adventurous?",
+    "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This project was developed by [Team Name] For INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nTeam member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\nTeam member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\nTeam member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\nTeam member 4: One sentence description of Team member 4 (e.g., year, major, etc.)."
+  }
+]
