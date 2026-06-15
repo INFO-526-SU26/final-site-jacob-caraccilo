@@ -22,16 +22,23 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     container:
       image: ghcr.io/gchism94/r_python_gh_actions:latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install R Packages
-        run: |
-          missing = checklist::install_missing_pkgs(dir = "./", glob = "*.qmd")
         shell: Rscript {0}
+        run: |
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+          missing <- checklist::install_missing_pkgs(
+            dir = "./",
+            glob = "*.qmd"
+          )
 
       - name: Install Python Packages
         run: |
