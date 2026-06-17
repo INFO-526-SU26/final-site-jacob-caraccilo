@@ -53,15 +53,15 @@ glimpse(water_insecurity_2023)
 
 ## The TidyTuesday Water Insecurity Dataset
 
-The 'Water Insecurity' Dataset was published on January 28th of 2025 for TidyTuesday and was curated by Niha Pereira. It explores household access to water across U.S. counties and allows us to investigate regional and population related patterns for water insecurity. Combined with demographic data, it can also provide insight into social and economic factors that may contribute to rates of water insecurity across the U.S.
+The 'Water Insecurity' Dataset was published on January 28th of 2025 for TidyTuesday and was curated by Niha Pereira. It explores household access to water across U.S. counties and allows us to investigate regional and population-related patterns for water insecurity. Combined with demographic data, it can also provide insight into social and economic factors that may contribute to rates of water insecurity across the U.S.
 
-The data includes two separate datasets for 2022 and 2023 each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.
+The data includes two separate datasets for 2022 and 2023, each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.
 
-The 2022 data set includes `r nrow(water_insecurity_2022)` counties while the 2023 data set includes `r nrow(water_insecurity_2023)`. They both contain `r ncol(water_insecurity_2022)` parameters:
+The 2022 dataset includes `r nrow(water_insecurity_2022)` counties, while the 2023 dataset includes `r nrow(water_insecurity_2023)`. They both contain `r ncol(water_insecurity_2022)` parameters:
 
 - `geoid`: A character variable of a unique county identifier code used by the U.S. Census Bureau.
 
-- `name`: A character variable of the name of the U.S. County.
+- `name`: A character variable of the name of the U.S. county.
 
 - `year`: A numerical variable of the year the data was collected (constant for each dataset).
 
@@ -71,46 +71,68 @@ The 2022 data set includes `r nrow(water_insecurity_2022)` counties while the 20
 
 - `plumbing`: A numerical variable representing the estimated number of people in the county who are water insecure, defined as their household lacking full plumbing.
 
-- `percent_lacking_plumbing`: A numerical variable of the percent of people in a country who are water insecure, basically being a ratio of `plumbing` and `total_pop`.
+- `percent_lacking_plumbing`: A numerical variable of the percent of people in a county who are water insecure; a ratio of `plumbing` and `total_pop`.
 
-I chose this dataset due to personal interest in water accessibility. I live in the California Central Valley which has struggled with water shortages and droughts for decades. I am interested in investigating and identifying social, regional, and economic factors that correlate with water insecurity and providing insight into the causes of water insecurity in my region and across the U.S.
+I chose this dataset due to personal interest in water accessibility. I live in the California Central Valley which has struggled with water shortages and droughts for decades. I am interested in investigating and identifying demographic and economic factors that correlate with water insecurity and providing insight into the causes of water insecurity in my region and across the U.S.
 
 ## Questions
 
-Two major questions I plan to investigate surround demographic factors and change to rates of water insecurity overtime.
+Two major questions I plan to investigate surround demographic factors and how the rate of water insecurity is changing over time.
 
-- What social, regional, and economic factors are correlated with higher and lower rates of water insecurity?
+- What demographic and economic factors are correlated with higher and lower rates of water insecurity?
 
-- Which regions saw the biggest changes in water insecurity rates from 2022 to 2023? Did those regions improve or worsen? Does the presence of certain socioeconomic or regional factors appear relevant to improvements or worsening of water insecurity rates?
+- Which regions saw the biggest changes in water insecurity rates from 2022 to 2023? Did those regions improve or worsen? Does the presence of certain demographic, regional, or economic factors appear correlated to these changes in water insecurity rates?
 
 ## Analysis plan
 
-For both of these questions, we will need to gather demographic data from the U.S. Census Bureau and will likely have to begin with answering question one to help inform our conclusions regarding question too. The following steps are proposed.
+For both of these questions, we will need to gather demographic data from the U.S. Census Bureau and will likely have to begin with answering question one to help inform our conclusions regarding question two. The following steps are proposed.
 
 ### Step 1: Identify and Download U.S. Census Bureau Data
 
-The TidyTuesday dataset does not include any demographic information for U.S. counties aside from population. Because of this, we will have to use additional external data from the U.S. Census Bureau. We will gather data regarding racial makeup and median income data for all U.S. counties included in our dataset.
+The TidyTuesday dataset does not include any demographic information for U.S. counties aside from population. Because of this, we will have to use additional external data from the U.S. Census Bureau. We will gather demographic and income data from relevant counties, including the following parameters:
+
+• Median Household Income
+
+• % African American
+
+• % Hispanic/Latino
+
+• % White
+
+• % Asian
+
+• % Native
 
 ### Step 2: Complete Data Processing and Cleaning to Fully Integrate U.S. Census Bureau Data with TidyTuesday Dataset
 
 Upon collecting all external data from the U.S. Census Bureau, we will complete data processing and cleaning to integrate all of the data into a single dataframe that we can use for analysis. This will include standardizing column names, removing extra data from counties not present in the TidyTuesday dataset, resolving issues with missing data, and any other data cleaning necessary to make the dataset easily usable for analysis.
 
-### Step 3: Construct visualizations of Water Insecurity Rates against Demographic Information
+All of the previously mentioned parameters will be added to the water insecurity datasets, and we will also manually create a region related parameter based on U.S. Census Bureau definitions.
 
-Once data processing is completed, we can create visualizations to compare demographic information to rates of water insecurity across all available counties.
+• West: Washington, Oregon, California, Alaska, Hawaii, Montana, Idaho, Wyoming, Colorado, New Mexico, Arizona, Utah, Nevada
 
-Difference in parameterization of the racial and income data will be necessary. For racial makeup we will compare counties with 50% or greater of a specific group to water insecurity and examine difference among all racial groups. For median income, we will be more easily able to compare all counties at once, but may subdivide by specific income brackets to better analyze trends.
+• South: Delaware, Maryland, District of Columbia, Virginia, West Virginia, North Carolina, South Carolina, Georgia, Florida, Kentucky, Tennessee, Mississippi, Alabama, Arkansas, Louisiana, Oklahoma, Texas
+
+• Midwest: Ohio, Indiana, Illinois, Michigan, Wisconsin, Minnesota, Iowa, Missouri, North Dakota, South Dakota, Nebraska, Kansas
+
+• Northeast: Maine, New Hampshire, Vermont, Massachusetts, Rhode Island, Connecticut, New York, New Jersey, Pennsylvania
+
+### Step 3: Addressing Question 1: Construct visualizations of Water Insecurity Rates against Demographic and Economic Parameters
+
+Once data processing is completed and all new parameters are collected or created, we will create visualizations comparing our parameters to rates of water insecurity across all available counties. We will initially only work with the 2022 dataset.
 
 The following visualization types are proposed:\
 \
-• Boxplots: Necessary to gather summarizing statistical information about all racial groups and median income.
+• Boxplots: Necessary to gather summarizing statistical information about all demographic groups and median income.
 
 • Density Plots: Helpful at identifying clusters of data that the boxplots would fail to show.
 
 • Linear Regression Plots: Tells us the specific strength of the relationship between water insecurity and demographics.
 
-### Step 4: Compare 2022 Data to 2023 Data Using the Same Methods to Determine Yearly Trends
+### Step 4: Addressing Question 2: Compare 2022 Data to 2023 Data Using the Same Methods to Determine Yearly Trends
 
-After identifying any interesting trends among water insecurity and demographics, we can compare the year to year data to see if there are any changes from 2022 to 2023. We do have to be careful not to project too much based off this analysis since we're only looking at two years. However, we can use this data to identify any major changes that occur. Furthermore, we can use this opportunity to see if specific demographics are related with certain changes in water insecurity from 2022 and 2023.
+After identifying any trends among the rate of water insecurity and our demographic and economic parameters, we can compare the year to year data to see if there are any changes from 2022 to 2023. We do have to be careful not to project too much based off this analysis since we're only looking at two years. However, we can use this data to identify any major changes that occur. Furthermore, we can use this opportunity to see if specific parameters are correlated with certain changes in water insecurity rates from 2022 and 2023.
 
-Collectively, both these questions will tell us about which counties and which specific communities are struggling with water insecurity and how rates in water insecurity appear to be changing over time.
+We will examine which regions of the country saw the biggest shifts in rates of water insecurity. This will be done by using the three visualization methods mentioned previously to create 2022 and 2023 plots of counties in each region of the country and their rates of water insecurity. I will also create a new variable to calculate the change in the water insecurity rate from 2022 to 2023 to visualize that shift.
+
+After this, we will also create side-by-side comparisons of the visualizations from Step 3 to see if any of our demographic or economic parameters are correlated with changes from 2022 to 2023.
