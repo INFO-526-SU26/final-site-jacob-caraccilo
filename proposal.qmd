@@ -29,26 +29,23 @@ if (!require("pacman"))
 
 # installs a list of packages when listed in p_load
  pacman::p_load(tidyverse,
-                tidytuesdayR,
-                sf,
                 kableExtra)
  
-# loads in TidyTuesday Water Insecurity Dataset
-tuesdata <- tidytuesdayR::tt_load('2025-01-28')
- 
-# sets the 2022 and 2023 data to their own variables
-water_insecurity_2022 <- tuesdata$water_insecurity_2022
-water_insecurity_2023 <- tuesdata$water_insecurity_2023
+# loads in 2022 water insecurity data
+water_2022 <- read_csv("data/water_insecurity_2022.csv")
+
+# loads in 2023 water insecurity data
+water_2023 <- read_csv("data/water_insecurity_2023.csv")
 ```
 
 ```{r}
 # provides glimpse at 2022 water insecurity data
-glimpse(water_insecurity_2022)
+glimpse(water_2022)
 ```
 
 ```{r}
 # provides glimpse at 2023 water insecurity data
-glimpse(water_insecurity_2023)
+glimpse(water_2023)
 ```
 
 ## The TidyTuesday Water Insecurity Dataset
@@ -57,7 +54,7 @@ The 'Water Insecurity' Dataset was published on January 28th of 2025 for TidyTue
 
 The data includes two separate datasets for 2022 and 2023, each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.
 
-The 2022 dataset includes `r nrow(water_insecurity_2022)` counties, while the 2023 dataset includes `r nrow(water_insecurity_2023)`. They both contain `r ncol(water_insecurity_2022)` parameters:
+The 2022 dataset includes `r nrow(water_2022)` counties, while the 2023 dataset includes `r nrow(water_2023)`. They both contain `r ncol(water_2022)` parameters:
 
 - `geoid`: A character variable of a unique county identifier code used by the U.S. Census Bureau.
 
