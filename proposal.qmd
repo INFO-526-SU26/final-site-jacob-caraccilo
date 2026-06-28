@@ -137,7 +137,7 @@ After this, we will also create side-by-side comparisons of the visualizations f
 ## Project Time Table
 
 | Task Name | Status | Due | Priority | Summary |
-|------------------|----------|-------|--------|-----------------------------------|
+|----|----|----|----|----|
 | Revise project proposal | Complete | June 28 | High | Update proposal to revise language and create project time table. |
 | Collect and join Census data | In Progress | June 28 | High | Use APIs to download necessary census data and finish joining all data into a single dataframe. |
 | Clean and prepare data | In Progress | June 28 | High | Address issues with the data, such as identifying any missing data, standardizing variables, and cleaning up any issues with formatting or column names. |
