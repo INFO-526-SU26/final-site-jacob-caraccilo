@@ -133,3 +133,16 @@ After identifying patterns among the rate of water insecurity and our demographi
 We will examine which regions of the country saw the biggest shifts in rates of water insecurity. This will be done by using the three visualization methods mentioned previously to create 2022 and 2023 plots of counties in each region of the country and their rates of water insecurity. I will also create a new variable to calculate the change in the water insecurity rate from 2022 to 2023 to visualize that shift.
 
 After this, we will also create side-by-side comparisons of the visualizations from Step 3 to see if any of our demographic or economic parameters are associated with changes from 2022 to 2023.
+
+## Project Time Table
+
+| Task Name | Status | Due | Priority | Summary |
+|------------------|----------|-------|--------|-----------------------------------|
+| Revise project proposal | Complete | June 28 | High | Update proposal to revise language and create project time table. |
+| Collect and join Census data | In Progress | June 28 | High | Use APIs to download necessary census data and finish joining all data into a single dataframe. |
+| Clean and prepare data | In Progress | June 28 | High | Address issues with the data, such as identifying any missing data, standardizing variables, and cleaning up any issues with formatting or column names. |
+| Question 1: Analyze demographic and economic associations with water insecurity | Not Started | June 29 | High | Create visualizations examining the association between water insecurity rates and demographic and economic characteristics. Also draft discussion of conclusions for question 1. |
+| Question 2: Analyze year-to-year changes | Not Started | June 29 | High | Compare the year-to-year changes in rates of water insecurity across counties and regions and examine for specific demographic, regional, or economic parameters associated with year-to-year changes. Also draft discussion of conclusions for question 2. |
+| Select visualizations and develop clear interpretations for presentation | Not Started | June 30 | High | Select final plots and analysis discussion to be used in presentation. |
+| Build and revise final website and presentation | Not Started | July 1 | High | Finish constructing the presentation and the website to prepare for the presentation. |
+| Record presentation and render, publish, and submit all items pertaining to the final project | Not Started | July 2 | High | Finish recording presentation, ensuring everything is properly rendered and published, and that everything required is formally submitted. |
