@@ -50,7 +50,7 @@ glimpse(water_2023)
 
 ## The TidyTuesday Water Insecurity Dataset
 
-The 'Water Insecurity' Dataset was published on January 28th of 2025 for TidyTuesday and was curated by Niha Pereira. It explores household access to water across U.S. counties and allows us to investigate regional and population-related patterns for water insecurity. Combined with demographic data, it can also provide insight into social and economic factors that may contribute to rates of water insecurity across the U.S.
+The 'Water Insecurity' Dataset was published on January 28th of 2025 for TidyTuesday and was curated by Niha Pereira. It explores household access to water across U.S. counties and allows us to investigate regional and population-related patterns for water insecurity. Combined with demographic data, it can also provide insight into social and economic characteristics that are associated with rates of water insecurity across the U.S.
 
 The data includes two separate datasets for 2022 and 2023, each covering the extent of water insecurity (defined as a household lacking full plumbing infrastructure) in approximately 850 counties. This data is directly drawn from the U.S. Census Bureau and was developed through surveys of the public, meaning totals for those who are water insecure are estimates.
 
@@ -70,15 +70,15 @@ The 2022 dataset includes `r nrow(water_2022)` counties, while the 2023 dataset 
 
 - `percent_lacking_plumbing`: A numerical variable of the percent of people in a county who are water insecure; a ratio of `plumbing` and `total_pop`.
 
-I chose this dataset due to personal interest in water accessibility. I live in the California Central Valley which has struggled with water shortages and droughts for decades. I am interested in investigating and identifying demographic and economic factors that correlate with water insecurity and providing insight into the causes of water insecurity in my region and across the U.S.
+I chose this dataset due to personal interest in water accessibility. I live in the California Central Valley which has struggled with water shortages and droughts for decades. I am interested in investigating and identifying demographic and economic characteristics that are associated with water insecurity and providing insight into those associations with water insecurity in my region and across the U.S.
 
 ## Questions
 
-Two major questions I plan to investigate surround demographic factors and how the rate of water insecurity is changing over time.
+Two major questions I plan to investigate surround demographic characteristics and how the rate of water insecurity is changing over time.
 
-- What demographic and economic factors are correlated with higher and lower rates of water insecurity?
+- What demographic and economic characteristics are associated with higher and lower rates of water insecurity?
 
-- Which regions saw the biggest changes in water insecurity rates from 2022 to 2023? Did those regions improve or worsen? Does the presence of certain demographic, regional, or economic factors appear correlated to these changes in water insecurity rates?
+- Which regions saw the biggest changes in water insecurity rates from 2022 to 2023? Did rates increase or decrease in those regions? Are county demographic, regional, or economic characteristics associated with these changes in water insecurity rates?
 
 ## Analysis plan
 
@@ -116,7 +116,7 @@ All of the previously mentioned parameters will be added to the water insecurity
 
 ### Step 3: Addressing Question 1: Construct visualizations of Water Insecurity Rates against Demographic and Economic Parameters
 
-Once data processing is completed and all new parameters are collected or created, we will create visualizations comparing our parameters to rates of water insecurity across all available counties. We will initially only work with the 2022 dataset.
+Once data processing is completed and all new parameters are collected or created, we will create visualizations comparing our parameters to rates of water insecurity across all counties available in the dataset. We will initially only work with the 2022 dataset.
 
 The following visualization types are proposed:\
 \
@@ -124,12 +124,12 @@ The following visualization types are proposed:\
 
 • Density Plots: Helpful at identifying clusters of data that the boxplots would fail to show.
 
-• Linear Regression Plots: Tells us the specific strength of the relationship between water insecurity and demographics.
+• Linear Regression Plots: Help summarize the direction and strength of association between water insecurity and demographics or economic characteristics.
 
-### Step 4: Addressing Question 2: Compare 2022 Data to 2023 Data Using the Same Methods to Determine Yearly Trends
+### Step 4: Addressing Question 2: Compare 2022 and 2023 Data to Examine Year-to-Year Changes
 
-After identifying any trends among the rate of water insecurity and our demographic and economic parameters, we can compare the year to year data to see if there are any changes from 2022 to 2023. We do have to be careful not to project too much based off this analysis since we're only looking at two years. However, we can use this data to identify any major changes that occur. Furthermore, we can use this opportunity to see if specific parameters are correlated with certain changes in water insecurity rates from 2022 and 2023.
+After identifying patterns among the rate of water insecurity and our demographic and economic parameters, we can compare the year to year data to see if there are any changes from 2022 to 2023. We do have to be careful not to project too much based off this analysis since we're only looking at two years. However, we can use this data to identify any major changes that occur. Furthermore, we can use this opportunity to see if specific parameters are associated with certain changes in water insecurity rates from 2022 and 2023.
 
 We will examine which regions of the country saw the biggest shifts in rates of water insecurity. This will be done by using the three visualization methods mentioned previously to create 2022 and 2023 plots of counties in each region of the country and their rates of water insecurity. I will also create a new variable to calculate the change in the water insecurity rate from 2022 to 2023 to visualize that shift.
 
-After this, we will also create side-by-side comparisons of the visualizations from Step 3 to see if any of our demographic or economic parameters are correlated with changes from 2022 to 2023.
+After this, we will also create side-by-side comparisons of the visualizations from Step 3 to see if any of our demographic or economic parameters are associated with changes from 2022 to 2023.
